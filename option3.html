@@ -46,6 +46,9 @@
     fetch('https://boards-api.greenhouse.io/v1/boards/westerossandbox')
       .then(response => response.json())
       .then(data => {
+        // Log the fetched data to the console for debugging
+        console.log('Fetched job board data:', data);
+
         // Create and populate the job board element
         const jobBoardElement = document.getElementById('jobBoard');
         data.jobs.forEach(job => {
