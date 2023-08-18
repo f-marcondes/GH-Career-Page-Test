@@ -37,13 +37,13 @@
   <div class="container">
     <h2>Careers</h2>
     <p>Join our team and shape the future of Westeros Sandbox.</p>
-    <pre id="jobBoardResponse"></pre>
+    <div id="jobBoardResponse"></div>
     <h3>Our Commitment</h3>
     <p>We are dedicated to creating an immersive virtual world where players can explore, interact, and create their own stories.</p>
   </div>
   <script>
     // Make an API request to fetch the job board data
-    fetch('https://boards-api.greenhouse.io/v1/boards/westerossandbox')
+    fetch('https://boards-api.greenhouse.io/v1/boards/westerossandbox/jobs')
       .then(response => response.json())
       .then(data => {
         // Display the raw response in a preformatted block
