@@ -37,7 +37,7 @@
   <div class="container">
     <h2>Careers</h2>
     <p>Join our team and shape the future of Westeros Sandbox.</p>
-    <div id="jobBoard"></div>
+    <pre id="jobBoardResponse"></pre>
     <h3>Our Commitment</h3>
     <p>We are dedicated to creating an immersive virtual world where players can explore, interact, and create their own stories.</p>
   </div>
@@ -46,21 +46,9 @@
     fetch('https://boards-api.greenhouse.io/v1/boards/westerossandbox')
       .then(response => response.json())
       .then(data => {
-        // Log the fetched data to the console for debugging
-        console.log('Fetched job board data:', data);
-
-        // Create and populate the job board element
-        const jobBoardElement = document.getElementById('jobBoard');
-        data.jobs.forEach(job => {
-          const jobElement = document.createElement('div');
-          jobElement.innerHTML = `
-            <h3>${job.title}</h3>
-            <p>${job.location.name}</p>
-            <p>${job.short_content}</p>
-            <a href="${job.absolute_url}" target="_blank">Apply Now</a>
-          `;
-          jobBoardElement.appendChild(jobElement);
-        });
+        // Display the raw response in a preformatted block
+        const jobBoardResponseElement = document.getElementById('jobBoardResponse');
+        jobBoardResponseElement.textContent = JSON.stringify(data, null, 2);
       })
       .catch(error => {
         console.error('Error fetching job board data:', error);
