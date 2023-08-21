@@ -48,27 +48,38 @@
     const urlParams = new URLSearchParams(window.location.search);
     const jobId = urlParams.get('gh_jid');
 
+    // Fetch and display job details
+    fetch(`https://boards-api.greenhouse.io/v1/boards/dcsandbox/jobs/${jobId}`)
+      .then(response => response.json())
+      .then(data => {
+        const jobDetailsElement = document.getElementById('jobDetails');
+        jobDetailsElement.innerHTML = `
+          <h1>${data.title}</h1>
+          <h3>Location: ${data.location.name}</h3>
+          <p>${data.content}</p>
+        `;
+      })
+      .catch(error => {
+        console.error('Error fetching job details:', error);
+      });
+
     // Function to handle form submission
     document.getElementById('applicationForm').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent the default form submission
 
-      // Get form data
       const formData = new FormData(event.target);
       const data = {};
       formData.forEach((value, key) => {
         data[key] = value;
       });
 
-      // Set up the Authorization header
       const headers = new Headers();
       headers.append('Authorization', 'Basic OTY0NjYzYjVjYzdkMjRmMGM0NGVmZDIzYmQ3MWRhNTctNTo=');
       headers.append('Content-Type', 'application/json');
 
-      // Log the cURL command
       const curlCommand = `curl -X POST -H 'Authorization: Basic OTY0NjYzYjVjYzdkMjRmMGM0NGVmZDIzYmQ3MWRhNTctNTo=' -H 'Content-Type: application/json' -d '${JSON.stringify(data)}' https://boards-api.greenhouse.io/v1/boards/dcsandbox/jobs/${jobId}`;
       console.log(curlCommand);
 
-      // Make the API request
       fetch(`https://boards-api.greenhouse.io/v1/boards/dcsandbox/jobs/${jobId}`, {
         method: 'POST',
         headers: headers,
@@ -76,12 +87,10 @@
       })
       .then(response => {
         if (response.status === 200) {
-          // Success response
           console.log('Application submitted successfully');
-          document.getElementById('applicationForm').reset(); // Reset form
+          document.getElementById('applicationForm').reset();
           document.getElementById('submissionResult').textContent = 'Thank you for applying!';
         } else {
-          // Error response
           console.error('Error submitting application:', response.status);
           document.getElementById('submissionResult').textContent = `Error: ${response.status}`;
         }
