@@ -3,21 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="pageTitle">Job Details - Star Wars Sandbox</title>
+<title>Star Wars Sandbox - Careers</title>
 <style>
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
     display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
-    min-height: 100vh; /* Ensure full viewport height */
-    background-color: #f0f0f0; /* Optional background color */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
   }
-  .job-details {
+  header {
+    background-color: #35424a;
+    color: white;
+    padding: 10px;
     text-align: center;
+  }
+  h1 {
+    margin-top: 0;
+  }
+  .container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  .job {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
   }
 </style>
 </head>
@@ -26,17 +44,15 @@
     <h1>Star Wars Sandbox</h1>
     <p>Your Journey Begins Here</p>
   </header>
-
-  <div class="job-details" id="jobDetails">
-    <h1 id="jobHeader">Job Title</h1>
-    <!-- Job location and description will be displayed here -->
+  <div class="container">
+    <h2>Careers</h2>
+    <p>Join our team and be part of the Star Wars Sandbox universe.</p>
+    <div id="jobDetails" class="job">
+      <!-- Job details will be displayed here -->
+    </div>
   </div>
-
   <div id="grnhse_app"></div>
-
-  <!-- Add the following line to include the <script> tag -->
   <script src="https://boards.greenhouse.io/embed/job_board/js?for=swtest"></script>
-
   <script>
     // Get the job ID from the URL parameter
     const urlParams = new URLSearchParams(window.location.search);
