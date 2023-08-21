@@ -10,16 +10,26 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    flex-direction: column;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
     min-height: 100vh; /* Ensure full viewport height */
     background-color: #f0f0f0; /* Optional background color */
+  }
+  .job-details {
+    text-align: center;
   }
 </style>
 </head>
 <body>
+  <header>
+    <h1>Star Wars Sandbox</h1>
+    <p>Your Journey Begins Here</p>
+  </header>
+
   <div class="job-details" id="jobDetails">
-    <!-- Job details will be displayed here -->
+    <h1 id="jobHeader">Job Title</h1>
+    <!-- Job location and description will be displayed here -->
   </div>
 
   <div id="grnhse_app"></div>
@@ -40,10 +50,13 @@
         const pageTitleElement = document.getElementById('pageTitle');
         pageTitleElement.textContent = `${data.title} - Star Wars Sandbox`;
 
+        // Update the job title in the header
+        const jobHeaderElement = document.getElementById('jobHeader');
+        jobHeaderElement.textContent = data.title;
+
         // Display the job location and details in the designated element
         const jobDetailsElement = document.getElementById('jobDetails');
         jobDetailsElement.innerHTML = `
-          <h1>${data.title}</h1>
           <h3>Location: ${data.location.name}</h3>
           <p>${data.content}</p>
         `;
