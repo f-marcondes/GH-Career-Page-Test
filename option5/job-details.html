@@ -40,6 +40,7 @@
       <input type="text" id="email" name="email" required><br><br>
       <input type="submit" value="Submit Application">
     </form>
+    <div id="submissionResult"></div>
   </div>
 
   <script>
@@ -69,14 +70,21 @@
         headers: headers,
         body: JSON.stringify(data),
       })
-      .then(response => response.json())
-      .then(responseData => {
-        console.log('Application submitted:', responseData);
-        // You can add any desired actions after successful submission
+      .then(response => {
+        if (response.status === 200) {
+          // Success response
+          console.log('Application submitted successfully');
+          document.getElementById('applicationForm').reset(); // Reset form
+          document.getElementById('submissionResult').textContent = 'Thank you for applying!';
+        } else {
+          // Error response
+          console.error('Error submitting application:', response.status);
+          document.getElementById('submissionResult').textContent = `Error: ${response.status}`;
+        }
       })
       .catch(error => {
         console.error('Error submitting application:', error);
-        // You can handle error cases here
+        document.getElementById('submissionResult').textContent = 'Error submitting application';
       });
     });
   </script>
