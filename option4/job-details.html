@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="jobTitle">Job Details - Star Wars Sandbox</title>
+<title>Job Details - Star Wars Sandbox</title>
 <style>
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
-  .job-description {
-    margin-top: 20px;
+  .job-details {
+    margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
@@ -19,10 +19,8 @@
 </style>
 </head>
 <body>
-  <h1 id="headerTitle">Job Details</h1>
-
-  <div class="job-description" id="jobDescription">
-    <!-- Job description will be displayed here -->
+  <div class="job-details" id="jobDetails">
+    <!-- Job details will be displayed here -->
   </div>
 
   <div id="grnhse_app"></div>
@@ -35,25 +33,21 @@
     const urlParams = new URLSearchParams(window.location.search);
     const jobId = urlParams.get('gh_jid');
 
-    // Make an API request to fetch the job post description
+    // Make an API request to fetch the job details
     fetch(`https://boards-api.greenhouse.io/v1/boards/swtest/jobs/${jobId}`)
       .then(response => response.json())
       .then(data => {
-        // Set the job title as the page title and header
-        const jobTitleElement = document.getElementById('jobTitle');
-        const headerTitleElement = document.getElementById('headerTitle');
-        jobTitleElement.textContent = `${data.title} - Star Wars Sandbox`;
-        headerTitleElement.textContent = data.title;
-
-        // Display the job description in the designated element
-        const jobDescriptionElement = document.getElementById('jobDescription');
-        jobDescriptionElement.innerHTML = `
-          <h3>Job Description</h3>
-          <div>${data.content}</div>
+        // Display the job details in the designated element
+        const jobDetailsElement = document.getElementById('jobDetails');
+        jobDetailsElement.innerHTML = `
+          <h2>${data.title}</h2>
+          <h3>Location: ${data.location.name}</h3>
+          <p>${data.content}</p>
+          <p>Apply URL: <a href="${data.absolute_url}" target="_blank">Apply Now</a></p>
         `;
       })
       .catch(error => {
-        console.error('Error fetching job post description:', error);
+        console.error('Error fetching job details:', error);
       });
   </script>
 </body>
