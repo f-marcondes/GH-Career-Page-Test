@@ -3,19 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Job Details - Star Wars Sandbox</title>
+<title id="jobTitle">Job Details - Star Wars Sandbox</title>
 <style>
   body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
   }
+  .job-description {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
 </style>
 </head>
 <body>
+  <h1 id="headerTitle">Job Details</h1>
+
+  <div class="job-description" id="jobDescription">
+    <!-- Job description will be displayed here -->
+  </div>
+
   <div id="grnhse_app"></div>
 
   <!-- Add the following line to include the <script> tag -->
   <script src="https://boards.greenhouse.io/embed/job_board/js?for=swtest"></script>
+
+  <script>
+    // Get the job ID from the URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const jobId = urlParams.get('gh_jid');
+
+    // Make an API request to fetch the job post description
+    fetch(`https://boards-api.greenhouse.io/v1/boards/swtest/jobs/${jobId}`)
+      .then(response => response.json())
+      .then(data => {
+        // Set the job title as the page title and header
+        const jobTitleElement = document.getElementById('jobTitle');
+        const headerTitleElement = document.getElementById('headerTitle');
+        jobTitleElement.textContent = `${data.title} - Star Wars Sandbox`;
+        headerTitleElement.textContent = data.title;
+
+        // Display the job description in the designated element
+        const jobDescriptionElement = document.getElementById('jobDescription');
+        jobDescriptionElement.innerHTML = `
+          <h3>Job Description</h3>
+          <div>${data.content}</div>
+        `;
+      })
+      .catch(error => {
+        console.error('Error fetching job post description:', error);
+      });
+  </script>
 </body>
 </html>
