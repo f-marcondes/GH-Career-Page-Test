@@ -19,6 +19,8 @@
 </style>
 </head>
 <body>
+  <h1 id="jobHeader">Job Title</h1>
+
   <div class="job-details" id="jobDetails">
     <!-- Job details will be displayed here -->
   </div>
@@ -37,10 +39,13 @@
     fetch(`https://boards-api.greenhouse.io/v1/boards/swtest/jobs/${jobId}`)
       .then(response => response.json())
       .then(data => {
-        // Display the job details in the designated element
+        // Display the job title as the header
+        const jobHeaderElement = document.getElementById('jobHeader');
+        jobHeaderElement.textContent = data.title;
+
+        // Display the job location and details in the designated element
         const jobDetailsElement = document.getElementById('jobDetails');
         jobDetailsElement.innerHTML = `
-          <h2>${data.title}</h2>
           <h3>Location: ${data.location.name}</h3>
           <p>${data.content}</p>
           <p>Apply URL: <a href="${data.absolute_url}" target="_blank">Apply Now</a></p>
