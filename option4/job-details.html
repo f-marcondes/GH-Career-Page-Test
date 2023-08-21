@@ -17,7 +17,6 @@
     background-color: #f9f9f9;
   }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/marked@3.0.7/marked.min.js"></script>
 </head>
 <body>
   <div class="job-details" id="jobDetails">
@@ -47,7 +46,7 @@
         jobDetailsElement.innerHTML = `
           <h1>${data.title}</h1>
           <h3>Location: ${data.location.name}</h3>
-          <div class="content">${marked(data.content)}</div>
+          <div>${data.content}</div>
         `;
       })
       .catch(error => {
