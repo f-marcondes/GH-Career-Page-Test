@@ -10,12 +10,6 @@
     margin: 0;
     padding: 0;
   }
-  .job-details {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-  }
 </style>
 </head>
 <body>
@@ -47,7 +41,6 @@
           <h1>${data.title}</h1>
           <h3>Location: ${data.location.name}</h3>
           <p>${data.content}</p>
-          <p>Apply URL: <a href="${data.absolute_url}" target="_blank">Apply Now</a></p>
         `;
       })
       .catch(error => {
