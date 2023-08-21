@@ -64,6 +64,10 @@
       headers.append('Authorization', 'Basic OTY0NjYzYjVjYzdkMjRmMGM0NGVmZDIzYmQ3MWRhNTctNTo=');
       headers.append('Content-Type', 'application/json');
 
+      // Log the cURL command
+      const curlCommand = `curl -X POST -H 'Authorization: Basic OTY0NjYzYjVjYzdkMjRmMGM0NGVmZDIzYmQ3MWRhNTctNTo=' -H 'Content-Type: application/json' -d '${JSON.stringify(data)}' https://boards-api.greenhouse.io/v1/boards/dcsandbox/jobs/${jobId}`;
+      console.log(curlCommand);
+
       // Make the API request
       fetch(`https://boards-api.greenhouse.io/v1/boards/dcsandbox/jobs/${jobId}`, {
         method: 'POST',
